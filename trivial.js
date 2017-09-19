@@ -1,9 +1,26 @@
 class Game {
   constructor(questions) {
     this.questions = questions;
+    this.isRunning = true;
   }
   askQuestion(n) {
-    prompt(this.questions[n].question, this.questions[n].answers);
+    var a = prompt(this.questions[n].question, this.questions[n].answers);
+    if(a == null) {
+      this.isRunning = false;
+    }
+    else if(a != this.questions[n].correctAnswer) {
+      alert("Wrong Answer, try again")
+      this.askQuestion(n);
+    } else {
+      alert("You little genius you, correct Answer");
+    }
+  }
+  play() {
+    var n = 0;
+    while(n < this.questions.length && this.isRunning){
+      this.askQuestion(n);
+      n++;
+    }
   }
 }
 
